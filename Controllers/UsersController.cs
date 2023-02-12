@@ -22,7 +22,7 @@ namespace e09.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Reader,Contributor,Manager")]
         [ProducesResponseType(typeof(IReadOnlyCollection<User>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetUsersAsync()
         {
@@ -30,7 +30,7 @@ namespace e09.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id:Guid}")]
+        [HttpGet("{id:Guid}"), Authorize(Roles = "Reader,Contributor,Manager")]
         [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetUserAsync([FromRoute] Guid id)
@@ -39,7 +39,7 @@ namespace e09.Controllers
             return user is not null ? Ok(user) : NotFound();
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Contributor,Manager")]
         [ProducesResponseType(typeof(User), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> CreateUserAsync([FromBody] UserDto user)
         {
@@ -47,7 +47,7 @@ namespace e09.Controllers
             return Created($"/users/{userCreated.Id}", userCreated);
         }
 
-        [HttpPut("{id:Guid}")]
+        [HttpPut("{id:Guid}"), Authorize(Roles = "Contributor,Manager")]
         [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateUserAsync([FromRoute] Guid id, [FromBody] UserDto user)
         {
@@ -55,7 +55,7 @@ namespace e09.Controllers
             return Ok(user);
         }
 
-        [HttpDelete("{id:Guid}")]
+        [HttpDelete("{id:Guid}"), Authorize(Roles = "Manager")]
         [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteUserAsync([FromRoute] Guid id)
         {
