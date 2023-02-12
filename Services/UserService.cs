@@ -77,11 +77,16 @@ namespace e09.Services
             return await Task.FromResult(_users.Any(user => user.Email.Equals(email)));
         }
 
-        public Task<bool> ValidatePasswordAsync(string email, string password)
+        public async Task<bool> ValidatePasswordAsync(string email, string password)
         {
             var user = _users.FirstOrDefault(user => user.Email.Equals(email));
 
-            return Task.FromResult(user.Password.Equals(password));
+            return await Task.FromResult(user.Password.Equals(password));
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await Task.FromResult(_users.FirstOrDefault(user => user.Email.Equals(email)));
         }
     }
 }

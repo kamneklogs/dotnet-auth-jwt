@@ -20,5 +20,8 @@ namespace e09.Services.Interfaces
 
         // Validate correct password
         Task<bool> ValidatePasswordAsync(string email, string password);
+
+        // Get user by email
+        Task<User> GetUserByEmailAsync(string email);
     }
 }
