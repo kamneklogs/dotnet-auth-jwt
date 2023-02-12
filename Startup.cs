@@ -46,9 +46,9 @@ namespace e09
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "https://localhost:5001",
-            ValidAudience = "https://localhost:5001",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+            ValidIssuer = "https://localhost:5001", // ditto as below
+            ValidAudience = "https://localhost:5001", // ditto as above
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345")) // this should be in a config file as environment variable
         };
     });
 

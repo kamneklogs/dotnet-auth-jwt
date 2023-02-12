@@ -71,5 +71,17 @@ namespace e09.Services
             userToUpdate.Password = user.Password;
             userToUpdate.Role = user.Role;
         }
+
+        public async Task<bool> UserExistsByEmailAsync(string email)
+        {
+            return await Task.FromResult(_users.Any(user => user.Email.Equals(email)));
+        }
+
+        public Task<bool> ValidatePasswordAsync(string email, string password)
+        {
+            var user = _users.FirstOrDefault(user => user.Email.Equals(email));
+
+            return Task.FromResult(user.Password.Equals(password));
+        }
     }
 }

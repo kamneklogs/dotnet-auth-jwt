@@ -14,5 +14,11 @@ namespace e09.Services.Interfaces
         Task<User> CreateUserAsync(UserDto user);
         Task DeleteUserAsync(Guid id);
         Task UpdateUserAsync(Guid id, UserDto user);
+
+        //Validate if a user exists
+        Task<bool> UserExistsByEmailAsync(string email);
+
+        // Validate correct password
+        Task<bool> ValidatePasswordAsync(string email, string password);
     }
 }
