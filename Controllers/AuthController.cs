@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using e09.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using e09.Services.Interfaces;
+using e09.Models;
 
 namespace e09.Controllers
 {
@@ -48,7 +48,7 @@ namespace e09.Controllers
                         new Claim[] {
                             new Claim(ClaimTypes.Name, userSigned.Name),
                             new Claim(ClaimTypes.Email, userSigned.Email),
-                            new Claim(ClaimTypes.Role, "Admin"),
+                            new Claim(ClaimTypes.Role, userSigned.Role.ToString()),
                             new Claim("IsActiveRole" , userSigned.IsActiveRole.ToString())
                         }
                     ),
